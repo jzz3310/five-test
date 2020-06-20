@@ -197,6 +197,7 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 					//播放棋子落下时的音乐
 					new AudioPlayer().player(gs.volume);
 					this.ux.setZeroChess(false);
+					this.ux.setContinueUx(false);
 					if(client == null){
 						servlet.sendClient("go,"+chess.x+","+chess.y);
 					}else if(servlet == null){
@@ -291,13 +292,13 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 			//降低音量按钮
 			this.downVolume();
 			
-		}else if(X >= 210 && X <= 330 && Y >= 760 && Y <= 790) {
+		}else if(X >= 210 && X <= 330 && Y >= 760 && Y <= 790) {//发送消息
 			//发送消息按钮
 			if(servlet != null || client != null)this.sendMsg();
 
-		}else if(X >= 50 && X <= 155 && Y >= 715 && Y <= 745) {
+		}else if(X >= 50 && X <= 155 && Y >= 715 && Y <= 745) {//悔棋功能
 			//悔棋按钮
-			if(servlet != null || client != null)if(gs.isGameStart && !ux.getZeroChess())this.undo();
+			if(servlet != null || client != null)if(gs.isGameStart && !ux.getZeroChess() && !ux.getContinueUx())this.undo();
 			
 		}
 	}
@@ -690,6 +691,7 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 			}else if(split[1].equals("undo")) {
 				//悔棋实现
 				if(split[2].equals("yes")) {
+					ux.setContinueUx(true);
 					chess.makeUndo();
 					gs.makeUndo();
 					ux.nowCount--;
@@ -751,6 +753,7 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 			this.chess.x = Integer.parseInt(split[1]);
 			this.chess.y = Integer.parseInt(split[2]);
 			this.chess.canDown(gs);
+			ux.setContinueUx(false);
 			this.repaint();
 		} else if(split[0].equals("end")){
 			this.gs.isGameStart=false;
@@ -845,6 +848,7 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 				}
 				chess.makeUndo();
 				gs.makeUndo();
+				ux.setContinueUx(true);
 				this.repaint();
 			}else {
 				if(servlet == null) {
