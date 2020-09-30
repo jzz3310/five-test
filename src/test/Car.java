@@ -1,6 +1,6 @@
 package test;
 
-public class Car {
+public  class Car {
 	private int id;
 	private String name;
 	private String color;
@@ -12,16 +12,12 @@ public class Car {
 		this.name = name;
 		this.color = color;
 	}
+
+	static {
+		car = new Car(1,"法拉利","红色");
+	}
 	
 	public static Car getInstance() {
-		if(car == null) {
-			synchronized(Car.class) {
-				if (car == null) {
-					System.out.println("第一次，为null");
-					car = new Car(1,"法拉利","红色");
-				}
-			}
-		}
 		return car;
 	}
 	

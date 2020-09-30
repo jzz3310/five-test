@@ -573,8 +573,6 @@ public class FiveGame  extends JFrame implements MouseListener,Runnable,ActionLi
 		
 	}
 	
-	
-	
 	@Override
 	public void run() {
 		if(gs.maxTime >= 120){
