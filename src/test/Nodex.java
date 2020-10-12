@@ -75,4 +75,8 @@ public class Nodex<T,X> {
             return null;
         }
     }
+
+    public void test() {
+        System.out.println("测试");
+    }
 }
