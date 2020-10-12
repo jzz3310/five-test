@@ -78,5 +78,6 @@ public class Nodex<T,X> {
 
     public void test() {
         System.out.println("测试");
+        System.out.println("第二次测试");
     }
 }
