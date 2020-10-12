@@ -1,7 +1,6 @@
 package five;
 
 import javax.swing.JOptionPane;
-import java.util.HashMap;
 
 public class MyFive {
 	public static void main(String[] args) {
